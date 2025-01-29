@@ -10,11 +10,10 @@ class ExController extends Controller
     {
         return view('homePage');
 
-
     }
     function aboutPage()
     {
-        return '<h1>About Page</h1><a href="/"> view Home page</a> ';
+        return view('singel-post');
     }
 
 
