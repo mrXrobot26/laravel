@@ -19,4 +19,37 @@ class UserController extends Controller
         return 'hello from register func';
     }
 
+    function login(Request $request)
+    {
+        $incomingFields = $request->validate([
+            'loginusername' => 'required',
+            'loginpassword' => 'required'
+            ]
+        );
+
+        if(auth()->attempt( ['username'=> $incomingFields['loginusername'] , 'password' => $incomingFields['loginpassword']] ))
+        {
+            $request->session()->regenerate();
+            return redirect('/')->with('success','Logged in');
+        }
+        else{
+            return redirect('/')->with('fail','Login failed');
+        }
+
+    }
+
+    function logout()
+    {
+        auth()->logout();
+        return redirect('/')->with('success','Logged out');
+    }
+
+    function showCorrentHomePage(){
+        if(auth()->check()){
+            return view('homePage-feed');
+        }else{
+            return view('homePage');
+        }
+    }
+
 }
