@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+
+    function viewPosts(Post $post)
+    {
+        return view('single-post', ["post" => $post]); // Corrected the view name
+    }
+
     function storeNewPost()
     {
         return view('Create-Post');
